@@ -1,6 +1,3 @@
-# DOSW_Lab6JJKCR
-Laboratorio No6 DOSW TDD - CUBRIMIENTO - ANÁLISIS ESTÁTICO
-
 <div align="center">
 
 # 🚀 DOSW-Laboratorio 6
