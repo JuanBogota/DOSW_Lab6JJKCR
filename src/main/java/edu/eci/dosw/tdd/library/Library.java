@@ -51,8 +51,7 @@ public class Library {
     * @return The new created loan.
     */
     public Loan loanABook(String userId, String isbn) {
-        //TODO Implement the login of loan a book to a user based on the UserId
-        and the isbn.
+        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
         return null;
     }
 
@@ -67,8 +66,7 @@ public class Library {
     * @return the loan with the RETURNED status.
     */
     public Loan returnLoan(Loan loan) {
-        //TODO Implement the login of loan a book to a user based on the UserId
-        and the isbn.
+        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
         return null;
     }
 
