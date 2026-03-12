@@ -17,3 +17,9 @@
 | 5 | Rafael Moreno |
 
 </div>
+
+## Pruebas Unitarias y TDD
+* Pruebas de **Juan Pablo Vélez**
+![Pruebas Juan Pa 1](/images/testJP.png)
+![Pruebas Juan Pa 2](/images/testFailureJP.png)
+* 
