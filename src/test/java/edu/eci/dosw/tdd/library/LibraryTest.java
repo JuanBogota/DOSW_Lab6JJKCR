@@ -1,14 +1,13 @@
 package edu.eci.dosw.tdd.library;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import edu.eci.dosw.tdd.library.book.Book;
 import edu.eci.dosw.tdd.library.loan.Loan;
 import edu.eci.dosw.tdd.library.loan.LoanStatus;
 import edu.eci.dosw.tdd.library.user.User;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
 
@@ -201,4 +200,79 @@ public class LibraryTest {
         assertNull(result);
         
     }
+}
+    @Test
+/**
+ * Verifica que addBook retorne false y no agregue nada al mapa
+ * cuando se intenta agregar un libro nulo.
+ */
+    public void shouldNotAddNullBook() {
+        // Given
+        Library library = new Library();
+
+        // When
+        boolean result = library.addBook(null);
+
+        // Then
+        assertFalse(result);
+        assertTrue(library.getBooks().isEmpty());
+    }
+
+
+    @Test
+/**
+ * Verifica que loanABook retorne null cuando no hay copias
+ * disponibles del libro (cantidad en 0 tras haberlo prestado ya).
+ */
+    public void shouldNotLoanBookWhenNoAvailableCopies() {
+        // Given
+        Library library = new Library();
+
+        User user1 = new User();
+        user1.setId("001");
+        user1.setName("Ana");
+        library.addUser(user1);
+
+        User user2 = new User();
+        user2.setId("002");
+        user2.setName("Pedro");
+        library.addUser(user2);
+
+        Book book = new Book("The Pragmatic Programmer", "David Thomas", "978-0135957059");
+        library.addBook(book); // solo 1 copia
+
+        library.loanABook("001", "978-0135957059");
+
+        // When
+        Loan secondLoan = library.loanABook("002", "978-0135957059");
+
+        // Then
+        assertNull(secondLoan);
+    }
+
+
+    @Test
+/**
+ * Verifica que al retornar un préstamo, la returnDate
+ * quede establecida con una fecha (no sea null).
+ */
+    public void shouldSetReturnDateWhenLoanIsReturned() {
+        // Given
+        Library library = new Library();
+
+        User user = new User();
+        user.setId("555");
+        user.setName("Maria");
+        library.addUser(user);
+
+        Book book = new Book("The Pragmatic Programmer", "David Thomas", "978-0135957059");
+        library.addBook(book);
+
+        Loan loan = library.loanABook("555", "978-0135957059");
+
+        // When
+        Loan returnedLoan = library.returnLoan(loan);
+        assertNotNull(returnedLoan.getReturnDate());
+    }
+
 }
