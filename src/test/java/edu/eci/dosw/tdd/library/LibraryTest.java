@@ -124,5 +124,6 @@ public class LibraryTest {
         Loan fakeLoan = new Loan(); // préstamo que nunca fue creado por la biblioteca
         Loan result = library.returnLoan(fakeLoan);
         assertNull(result);
+        
     }
 }
