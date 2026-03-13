@@ -23,6 +23,12 @@
 ![Pruebas Juan Pa 1](/images/testJP.png)
 ![Pruebas Juan Pa 2](/images/testFailureJP.png)
 
+
+---
+
+* Pruebas de **Juan Daniel Bogotá**
+![Pruebas Juan Bogotá](/images/testJB.png)
+![Pruebas Juan Bogotá](/images/testFailureJB.png)
 * Pruebas de **Cristian José Gonzalez**
 ![Pruebas Cris 1](/images/Cris.jpeg)
 
