@@ -12,7 +12,7 @@ public class LibraryTest {
 
     @Test
     /**
-     * Method by Juan pablo Vélez
+     * Method by Juan pablo Vélez 
      * Esta prueba solo crea el libro. no cumple ninguna otra característica.
      * En este caso el libro no está en el sistema.
      */
@@ -70,5 +70,59 @@ public class LibraryTest {
         library.returnLoan(newLoan);
         //Then
         assertEquals(newLoan.getStatus(), LoanStatus.RETURNED);
+    }
+
+
+    /**
+     * Method by Cristian Gonzalez Rodriguez.
+     * Verifica que un libro nuevo pueda ser agregado correctamente a la biblioteca.
+     * La prueba valida que cuando se agrega un libro que no existe previamente
+     * en el sistema, este quede almacenado dentro de la colección de libros
+     * administrada por la biblioteca.
+     */
+    @Test
+    public void shouldAddBookToLibrary() {
+
+        Library library = new Library();
+        Book book = new Book("Clean Code", "Robert Martin", "111");
+        library.addBook(book);
+        assertTrue(library.getBooks().containsKey(book));
+    }
+
+    /**
+     * Method by Cristian Gonzalez Rodriguez.
+     * Verifica que la biblioteca pueda crear un préstamo cuando el usuario
+     * está registrado en el sistema y el libro se encuentra disponible.
+     * La prueba valida que el método loanABook retorne un objeto Loan válido.
+     */
+    @Test
+    public void shouldCreateLoanWhenBookAndUserExist() {
+
+        Library library = new Library();
+
+        User user = new User();
+        user.setId("2");
+        user.setName("Cristian");
+        library.addUser(user);
+        Book book = new Book("Java", "James Gosling", "222");
+        library.addBook(book);
+        Loan loan = library.loanABook("2", "222");
+        assertNotNull(loan);
+    }
+
+    /**
+     * Method by Cristian Gonzalez Rodriguez.
+     * Verifica el comportamiento del sistema cuando se intenta devolver
+     * un préstamo que no está registrado en la biblioteca.
+     * La prueba valida que el método returnLoan no procese la devolución
+     * y retorne null cuando el préstamo no existe en la lista de préstamos.
+     */
+    @Test
+    void shouldNotReturnLoanIfLoanDoesNotExist() {
+
+        Library library = new Library();
+        Loan fakeLoan = new Loan(); // préstamo que nunca fue creado por la biblioteca
+        Loan result = library.returnLoan(fakeLoan);
+        assertNull(result);
     }
 }
