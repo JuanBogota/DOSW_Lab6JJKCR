@@ -73,4 +73,8 @@ public class Library {
     public boolean addUser(User user) {
         return users.add(user);
     }
+
+    public Map<Book, Integer> getBooks() {
+        return books;
+    }
 }
