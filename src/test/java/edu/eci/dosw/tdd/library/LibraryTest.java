@@ -112,25 +112,17 @@ public class LibraryTest {
 
     /**
      * Method by Cristian Gonzalez Rodriguez.
-     * Verifica que un préstamo activo pueda ser devuelto correctamente.
-     * La prueba valida que al ejecutar el método returnLoan el estado
-     * del préstamo cambie a RETURNED.
+     * Verifica el comportamiento del sistema cuando se intenta devolver
+     * un préstamo que no está registrado en la biblioteca.
+     * La prueba valida que el método returnLoan no procese la devolución
+     * y retorne null cuando el préstamo no existe en la lista de préstamos.
      */
     @Test
-    public void shouldChangeLoanStatusToReturned() {
+    void shouldNotReturnLoanIfLoanDoesNotExist() {
 
         Library library = new Library();
-
-        User user = new User();
-        user.setId("2");
-        user.setName("Cristian");
-        library.addUser(user);
-        Book book = new Book("Python", "Guido", "333");
-        library.addBook(book);
-        Loan loan = library.loanABook("2", "333");
-        library.returnLoan(loan);
-        assertEquals(LoanStatus.RETURNED, loan.getStatus());
+        Loan fakeLoan = new Loan(); // préstamo que nunca fue creado por la biblioteca
+        Loan result = library.returnLoan(fakeLoan);
+        assertNull(result);
     }
-
-
 }
