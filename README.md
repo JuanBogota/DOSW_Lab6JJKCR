@@ -35,3 +35,10 @@
 * Pruebas de **Cristian José Gonzalez**
 
 ![Pruebas Cris 1](/images/Cris.jpeg)
+
+---
+* Pruebas de **Kevin Segura Velandia**
+
+
+![Pruebas-kevinsegura](/images/Pruebas1-kevinsegura.jpeg)
+![Pruebas-kevinsegura](/images/Pruebas2-kevinsegura.jpeg)

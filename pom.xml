@@ -11,6 +11,13 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <!-- SonarQube y Jacoco -->
+        <sonar.projectKey>library</sonar.projectKey>
+        <sonar.projectName>library</sonar.projectName>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.exclusions>src//configurators/*</sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -80,6 +87,13 @@
                     </execution>
 
                 </executions>
+            </plugin>
+
+            <!-- Plugin Sonar -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version>
             </plugin>
 
         </plugins>
