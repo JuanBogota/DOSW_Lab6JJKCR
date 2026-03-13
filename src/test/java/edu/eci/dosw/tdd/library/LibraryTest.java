@@ -273,4 +273,71 @@ public class LibraryTest {
         assertNotNull(returnedLoan);
         assertNotNull(returnedLoan.getReturnDate());
     }
+
+    /**
+     * Method by Rafael Moreno
+     * Verifica que no se pueda agregar un libro null al sistema.
+     * La prueba valida que el método addBook retorne false cuando
+     * se intenta agregar un libro null.
+     */
+    @Test
+    public void shouldNotAddNullBook() {
+        // Given
+        Library library = new Library();
+
+        // When
+        boolean result = library.addBook(null);
+
+        // Then
+        assertEquals(false, result);
+        assertEquals(0, library.getBooks().size());
+    }
+
+    /**
+     * Method by Rafael Moreno
+     * Verifica que no se pueda crear un préstamo cuando el usuario no existe.
+     * La prueba valida que el método loanABook retorne null cuando
+     * se intenta crear un préstamo con un userId que no está registrado.
+     */
+    @Test
+    public void shouldNotLoanBookWhenUserDoesNotExist() {
+        // Given
+        Library library = new Library();
+        Book book = new Book("The Pragmatic Programmer", "Andrew Hunt", "978-0201616224");
+        library.addBook(book);
+
+        // When
+        Loan loan = library.loanABook("999", "978-0201616224");
+
+        // Then
+        assertNull(loan);
+    }
+
+    /**
+     * Method by Rafael Moreno
+     * Verifica que al devolver un préstamo, la fecha de devolución se establezca.
+     * La prueba valida que el método returnLoan actualice la fecha de retorno
+     * del préstamo cuando se devuelve correctamente.
+     */
+    @Test
+    public void shouldSetReturnDateWhenReturningLoan() {
+        // Given
+        Library library = new Library();
+        User user = new User();
+        user.setId("456");
+        user.setName("Rafael");
+        library.addUser(user);
+
+        Book book = new Book("Design Patterns", "Gang of Four", "978-0201633612");
+        library.addBook(book);
+
+        Loan loan = library.loanABook("456", "978-0201633612");
+
+        // When
+        Loan returnedLoan = library.returnLoan(loan);
+
+        // Then
+        assertNotNull(returnedLoan);
+        assertNotNull(returnedLoan.getReturnDate());
+    }
 }
