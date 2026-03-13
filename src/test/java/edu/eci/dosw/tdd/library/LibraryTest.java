@@ -13,7 +13,7 @@ public class LibraryTest {
 
     @Test
     /**
-     * Method by Juan pablo Vélez 
+     * Method by Juan pablo Vélez
      * Esta prueba solo crea el libro. no cumple ninguna otra característica.
      * En este caso el libro no está en el sistema.
      */
@@ -31,7 +31,6 @@ public class LibraryTest {
     /**
      * Method by Juan Pablo Vélez
      * Esta prueba crea la loan no cumple ninguna otra caracteristica
-     * 
      */
     public void shouldLoanBook() {
         //Having
@@ -70,13 +69,12 @@ public class LibraryTest {
         assertEquals(newLoan.getStatus(), LoanStatus.RETURNED);
     }
 
-
     @Test
     /**
      * Method by Juan Daniel Bogotá
-     * Esta prueba se encarga de verificar que al agregar el mismo libro dos veces, 
-     * la cantidad de ese libro en el sistema aumente a 2, y que el tamaño del mapa de libros siga siendo 1, 
-     * ya que es el mismo libro.
+     * Esta prueba se encarga de verificar que al agregar el mismo libro dos veces,
+     * la cantidad de ese libro en el sistema aumente a 2, y que el tamaño del mapa
+     * de libros siga siendo 1, ya que es el mismo libro.
      */
     public void shouldIncreaseQuantityWhenAddingSameBookTwice() {
         // Given
@@ -92,13 +90,11 @@ public class LibraryTest {
         assertEquals(2, library.getBooks().get(book));
     }
 
-
     @Test
     /**
      * Method by Juan Daniel Bogotá
-     * Esta prueba se encarga de verificar que al crear un préstamo para un libro, 
-     * la cantidad de ese libro en el sistema disminuya en 1, 
-     * lo que indica que el libro ha sido prestado y ya no está disponible para otros usuarios.
+     * Esta prueba se encarga de verificar que al crear un préstamo para un libro,
+     * la cantidad de ese libro en el sistema disminuya en 1.
      */
     public void shouldDecreaseAvailableBooksWhenLoanIsCreated() {
         // Given
@@ -120,13 +116,11 @@ public class LibraryTest {
         assertEquals(1, library.getBooks().get(book));
     }
 
-
     @Test
     /**
      * Method by Juan Daniel Bogotá
-     * Esta prueba se encarga de verificar que al devolver un préstamo, la cantidad de ese libro en el sistema aumente en 1,
-     * lo que indica que el libro ha sido devuelto y está disponible nuevamente para otros usuarios.
-     * Además, se verifica que el estado del préstamo se actualice a RETURNED.
+     * Esta prueba se encarga de verificar que al devolver un préstamo,
+     * la cantidad de ese libro en el sistema aumente en 1.
      */
     public void shouldIncreaseAvailableBooksWhenReturningLoan() {
         // Given
@@ -147,115 +141,113 @@ public class LibraryTest {
 
         // Then
         assertEquals(2, library.getBooks().get(book));
+    }
+
+    @Test
     /**
      * Method by Cristian Gonzalez Rodriguez.
      * Verifica que un libro nuevo pueda ser agregado correctamente a la biblioteca.
-     * La prueba valida que cuando se agrega un libro que no existe previamente
-     * en el sistema, este quede almacenado dentro de la colección de libros
-     * administrada por la biblioteca.
      */
-    @Test
     public void shouldAddBookToLibrary() {
-
         Library library = new Library();
         Book book = new Book("Clean Code", "Robert Martin", "111");
         library.addBook(book);
         assertTrue(library.getBooks().containsKey(book));
     }
 
+    @Test
     /**
      * Method by Cristian Gonzalez Rodriguez.
      * Verifica que la biblioteca pueda crear un préstamo cuando el usuario
      * está registrado en el sistema y el libro se encuentra disponible.
-     * La prueba valida que el método loanABook retorne un objeto Loan válido.
      */
-    @Test
     public void shouldCreateLoanWhenBookAndUserExist() {
-
         Library library = new Library();
 
         User user = new User();
         user.setId("2");
         user.setName("Cristian");
         library.addUser(user);
+
         Book book = new Book("Java", "James Gosling", "222");
         library.addBook(book);
+
         Loan loan = library.loanABook("2", "222");
         assertNotNull(loan);
     }
 
+    @Test
     /**
      * Method by Cristian Gonzalez Rodriguez.
-     * Verifica el comportamiento del sistema cuando se intenta devolver
-     * un préstamo que no está registrado en la biblioteca.
-     * La prueba valida que el método returnLoan no procese la devolución
-     * y retorne null cuando el préstamo no existe en la lista de préstamos.
+     * Verifica que returnLoan retorne null cuando el préstamo
+     * no existe en la biblioteca.
      */
-    @Test
-    void shouldNotReturnLoanIfLoanDoesNotExist() {
-
+    public void shouldNotReturnLoanIfLoanDoesNotExist() {
         Library library = new Library();
-        Loan fakeLoan = new Loan(); // préstamo que nunca fue creado por la biblioteca
+        Loan fakeLoan = new Loan();
         Loan result = library.returnLoan(fakeLoan);
         assertNull(result);
-        
     }
-}
+
     @Test
-/**
- * Verifica que addBook retorne false y no agregue nada al mapa
- * cuando se intenta agregar un libro nulo.
- */
-    public void shouldNotAddNullBook() {
+    /**
+     * Verifica que addBook retorne true y agregue el libro al mapa
+     * cuando se agrega un libro válido por primera vez.
+     * DEBE FALLAR: addBook siempre retorna false (sin implementar).
+     */
+    public void shouldReturnTrueWhenAddingValidBook() {
+        // Given
+        Library library = new Library();
+        Book book = new Book(
+                "The Pragmatic Programmer",
+                "David Thomas",
+                "978-0135957059"
+        );
+
+        // When
+        boolean result = library.addBook(book);
+
+        // Then
+        assertTrue(result);
+        assertEquals(1, library.getBooks().get(book));
+    }
+
+    @Test
+    /**
+     * Verifica que loanABook retorne un préstamo con estado ACTIVE
+     * cuando el usuario y libro existen y hay copias disponibles.
+     * DEBE FALLAR: loanABook siempre retorna null (sin implementar).
+     */
+    public void shouldCreateLoanWithActiveStatus() {
         // Given
         Library library = new Library();
 
-        // When
-        boolean result = library.addBook(null);
+        User user = new User();
+        user.setId("001");
+        user.setName("Ana");
+        library.addUser(user);
 
-        // Then
-        assertFalse(result);
-        assertTrue(library.getBooks().isEmpty());
-    }
-
-
-    @Test
-/**
- * Verifica que loanABook retorne null cuando no hay copias
- * disponibles del libro (cantidad en 0 tras haberlo prestado ya).
- */
-    public void shouldNotLoanBookWhenNoAvailableCopies() {
-        // Given
-        Library library = new Library();
-
-        User user1 = new User();
-        user1.setId("001");
-        user1.setName("Ana");
-        library.addUser(user1);
-
-        User user2 = new User();
-        user2.setId("002");
-        user2.setName("Pedro");
-        library.addUser(user2);
-
-        Book book = new Book("The Pragmatic Programmer", "David Thomas", "978-0135957059");
-        library.addBook(book); // solo 1 copia
-
-        library.loanABook("001", "978-0135957059");
+        Book book = new Book(
+                "The Pragmatic Programmer",
+                "David Thomas",
+                "978-0135957059"
+        );
+        library.addBook(book);
 
         // When
-        Loan secondLoan = library.loanABook("002", "978-0135957059");
+        Loan loan = library.loanABook("001", "978-0135957059");
 
         // Then
-        assertNull(secondLoan);
+        assertNotNull(loan);
+        assertEquals(LoanStatus.ACTIVE, loan.getStatus());
     }
 
-
     @Test
-/**
- * Verifica que al retornar un préstamo, la returnDate
- * quede establecida con una fecha (no sea null).
- */
+    /**
+     * Verifica que al retornar un préstamo válido, la returnDate
+     * quede establecida con una fecha (no sea null).
+     * DEBE FALLAR: returnLoan siempre retorna null (sin implementar).
+     */
     public void shouldSetReturnDateWhenLoanIsReturned() {
         // Given
         Library library = new Library();
@@ -265,14 +257,20 @@ public class LibraryTest {
         user.setName("Maria");
         library.addUser(user);
 
-        Book book = new Book("The Pragmatic Programmer", "David Thomas", "978-0135957059");
+        Book book = new Book(
+                "The Pragmatic Programmer",
+                "David Thomas",
+                "978-0135957059"
+        );
         library.addBook(book);
 
         Loan loan = library.loanABook("555", "978-0135957059");
 
         // When
         Loan returnedLoan = library.returnLoan(loan);
+
+        // Then
+        assertNotNull(returnedLoan);
         assertNotNull(returnedLoan.getReturnDate());
     }
-
 }
