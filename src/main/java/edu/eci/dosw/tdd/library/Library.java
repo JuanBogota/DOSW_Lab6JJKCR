@@ -22,8 +22,6 @@ public class Library {
     }
 
     /**
-    * Adds a new {@link edu.eci.cvds.tdd.library.book.Book} into the system, the
-    * book is store in a Map that contains the {@link edu.eci.cvds.tdd.library.book.Book} 
     * and the amount of books available, if the book already exist the amount should 
     * increase by 1 and if the book is new the amount should be 1, this method returns true if 
     * the operation is successful false otherwise.
@@ -40,7 +38,6 @@ public class Library {
     * the book identify by the isbn, the loan should be store in the list of loans, 
     * to successfully create a loan is required to validate that the book is available, 
     * that the user exist and the same user could not have loan for the same book
-    * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE}, once these
     * requirements are meet the amount of books is decreased and the loan should be 
     * created with {@linkedu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE} status and
     * the loan date should be the current date.
@@ -57,8 +54,7 @@ public class Library {
 
     /**
     * This method return a loan, meaning that the amount of books should be increased by 1, 
-    * the status of the Loan in the loan list should be 
-    * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#RETURNED} and the loan return
+    * the status of the Loan in the loan list should be
     * date should be the current date, validate that the loan exist.
     *
     * @param loan loan to return.
@@ -66,7 +62,6 @@ public class Library {
     * @return the loan with the RETURNED status.
     */
     public Loan returnLoan(Loan loan) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
         return null;
     }
 
