@@ -29,3 +29,7 @@
 * Pruebas de **Juan Daniel Bogotá**
 ![Pruebas Juan Bogotá](/images/testJB.png)
 ![Pruebas Juan Bogotá](/images/testFailureJB.png)
+* Pruebas de **Cristian José Gonzalez**
+![Pruebas Cris 1](/images/Cris.jpeg)
+
+* 
