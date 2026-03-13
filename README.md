@@ -33,6 +33,5 @@
 ---
 
 * Pruebas de **Cristian José Gonzalez**
-![Pruebas Cris 1](/images/Cris.jpeg)
 
-* 
+![Pruebas Cris 1](/images/Cris.jpeg)
