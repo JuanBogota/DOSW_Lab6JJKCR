@@ -1,16 +1,21 @@
 package edu.eci.dosw.tdd.library;
-import edu.eci.dosw.tdd.library.book.Book;
-import edu.eci.dosw.tdd.library.loan.Loan;
-import edu.eci.dosw.tdd.library.user.User;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.eci.dosw.tdd.library.book.Book;
+import edu.eci.dosw.tdd.library.loan.Loan;
+import edu.eci.dosw.tdd.library.loan.LoanStatus;
+import edu.eci.dosw.tdd.library.user.User;
+
 /**
-* Library responsible for manage the loans and the users.
-*/
+ * Library responsible for manage the loans and the users.
+ */
 public class Library {
+
     private final List<User> users;
     private final Map<Book, Integer> books;
     private final List<Loan> loans;
@@ -22,55 +27,103 @@ public class Library {
     }
 
     /**
-    * Adds a new {@link edu.eci.cvds.tdd.library.book.Book} into the system, the
-    * book is store in a Map that contains the {@link edu.eci.cvds.tdd.library.book.Book} 
-    * and the amount of books available, if the book already exist the amount should 
-    * increase by 1 and if the book is new the amount should be 1, this method returns true if 
-    * the operation is successful false otherwise.
-    * @param book The book to store in the map.
-    * @return true if the book was stored false otherwise.
-    */
+     * Adds a new Book into the system. If the book already exists,
+     * increases its quantity by 1. If it's new, sets quantity to 1.
+     *
+     * @param book The book to store in the map.
+     * @return true if the book was stored, false otherwise.
+     */
     public boolean addBook(Book book) {
-        //TODO Implement the logic to add a new book into the map.
-        return false;
+        if (book == null) {
+            return false;
+        }
+        if (books.containsKey(book)) {
+            books.put(book, books.get(book) + 1);
+        } else {
+            books.put(book, 1);
+        }
+        return true;
     }
 
     /**
-    * This method creates a new loan with for the User identify by the userId and 
-    * the book identify by the isbn, the loan should be store in the list of loans, 
-    * to successfully create a loan is required to validate that the book is available, 
-    * that the user exist and the same user could not have loan for the same book
-    * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE}, once these
-    * requirements are meet the amount of books is decreased and the loan should be 
-    * created with {@linkedu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE} status and
-    * the loan date should be the current date.
-    * 
-    * @param userId id of the user.
-    * @param isbn book identification.
-    *
-    * @return The new created loan.
-    */
+     * Creates a new loan for the User identified by userId and
+     * the book identified by isbn.
+     * Validations:
+     * - The book must exist and have available copies
+     * - The user must exist
+     * - The same user cannot have an ACTIVE loan for the same book
+     *
+     * @param userId id of the user.
+     * @param isbn   book identification.
+     * @return The new created loan, or null if validations fail.
+     */
     public Loan loanABook(String userId, String isbn) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-        return null;
+        User foundUser = null;
+        for (User user : users) {
+            if (user.getId().equals(userId)) {
+                foundUser = user;
+                break;
+            }
+        }
+        if (foundUser == null) {
+            return null;
+        }
+        Book foundBook = null;
+        for (Book book : books.keySet()) {
+            if (book.getIsbn().equals(isbn)) {
+                foundBook = book;
+                break;
+            }
+        }
+        if (foundBook == null || books.get(foundBook) <= 0) {
+            return null;
+        }
+
+        for (Loan loan : loans) {
+            if (loan.getUser().getId().equals(userId)
+                    && loan.getBook().getIsbn().equals(isbn)
+                    && loan.getStatus() == LoanStatus.ACTIVE) {
+                return null;
+            }
+        }
+
+        Loan newLoan = new Loan();
+        newLoan.setBook(foundBook);
+        newLoan.setUser(foundUser);
+        newLoan.setStatus(LoanStatus.ACTIVE);
+        newLoan.setLoanDate(LocalDateTime.now());
+
+        books.put(foundBook, books.get(foundBook) - 1);
+        loans.add(newLoan);
+
+        return newLoan;
     }
 
     /**
-    * This method return a loan, meaning that the amount of books should be increased by 1, 
-    * the status of the Loan in the loan list should be 
-    * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#RETURNED} and the loan return
-    * date should be the current date, validate that the loan exist.
-    *
-    * @param loan loan to return.
-    *
-    * @return the loan with the RETURNED status.
-    */
+     * Returns a loan. Increases book quantity by 1,
+     * sets loan status to RETURNED and sets the return date.
+     * Validates that the loan exists in the system.
+     *
+     * @param loan loan to return.
+     * @return the loan with RETURNED status, or null if it doesn't exist.
+     */
     public Loan returnLoan(Loan loan) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-        return null;
+        if (!loans.contains(loan)) {
+            return null;
+        }
+        Book book = loan.getBook();
+        books.put(book, books.get(book) + 1);
+        loan.setStatus(LoanStatus.RETURNED);
+        loan.setReturnDate(LocalDateTime.now());
+
+        return loan;
     }
 
     public boolean addUser(User user) {
         return users.add(user);
+    }
+
+    public Map<Book, Integer> getBooks() {
+        return books;
     }
 }
