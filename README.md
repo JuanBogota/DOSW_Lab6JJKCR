@@ -62,8 +62,8 @@
 
 <div align="center">
 
-![Kevin Segura Tests 1](/images/Pruebas1-kevinsegura.jpeg)
-![Kevin Segura Tests 2](/images/Pruebas2-kevinsegura.jpeg)
+![Kevin Segura Tests 1](/images/pruebas1-kevinsegura.jpeg)
+![Kevin Segura Tests 2](/images/pruebas2-kevinsegura.jpeg)
 
 </div>
 
