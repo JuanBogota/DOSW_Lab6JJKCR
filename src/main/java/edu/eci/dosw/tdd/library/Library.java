@@ -1,15 +1,15 @@
 package edu.eci.dosw.tdd.library;
 
-import edu.eci.dosw.tdd.library.book.Book;
-import edu.eci.dosw.tdd.library.loan.Loan;
-import edu.eci.dosw.tdd.library.loan.LoanStatus;
-import edu.eci.dosw.tdd.library.user.User;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import edu.eci.dosw.tdd.library.book.Book;
+import edu.eci.dosw.tdd.library.loan.Loan;
+import edu.eci.dosw.tdd.library.loan.LoanStatus;
+import edu.eci.dosw.tdd.library.user.User;
 
 /**
  * Library responsible for manage the loans and the users.
@@ -34,7 +34,15 @@ public class Library {
      * @return true if the book was stored, false otherwise.
      */
     public boolean addBook(Book book) {
-     return false;
+        if (book == null) {
+            return false;
+        }
+        if (books.containsKey(book)) {
+            books.put(book, books.get(book) + 1);
+        } else {
+            books.put(book, 1);
+        }
+        return true;
     }
 
     /**

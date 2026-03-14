@@ -1,15 +1,19 @@
 <div align="center">
 
-# 🚀 DOSW-Laboratorio 6
-# Laboratorio No6 DOSW TDD - CUBRIMIENTO - ANÁLISIS ESTÁTICO
+# 🚀 DOSW - Laboratory 6
+## TDD, Test Coverage, and Static Analysis
 ### 📚 Desarrollo y Operaciones de Software (DOSW)
 
 ---
 
-## 👥 Participantes
+</div>
 
-| # | Nombre |
-|---|--------|
+## 👥 Team Members
+
+<div align="center">
+
+| # | Name |
+|---|------|
 | 1 | Juan Pablo Velez |
 | 2 | Juan Daniel Bogota |
 | 3 | Kevin Segura |
@@ -18,27 +22,67 @@
 
 </div>
 
-## Pruebas Unitarias y TDD
-* Pruebas de **Juan Pablo Vélez**
-![Pruebas Juan Pa 1](/images/testJP.png)
-![Pruebas Juan Pa 2](/images/testFailureJP.png)
+---
 
+## 🧪 Unit Testing and TDD
+
+### Juan Pablo Vélez
+
+<div align="center">
+
+![Juan Pablo Tests 1](/images/testJP.png)
+![Juan Pablo Tests 2](/images/testFailureJP.png)
+
+</div>
 
 ---
 
-* Pruebas de **Juan Daniel Bogotá**
-![Pruebas Juan Bogotá](/images/testJB.png)
-![Pruebas Juan Bogotá](/images/testFailureJB.png)
+### Juan Daniel Bogotá
+
+<div align="center">
+
+![Juan Daniel Tests 1](/images/testJB.png)
+![Juan Daniel Tests 2](/images/testFailureJB.png)
+
+</div>
 
 ---
 
-* Pruebas de **Cristian José Gonzalez**
+### Cristian José Gonzalez
 
-![Pruebas Cris 1](/images/Cris.jpeg)
+<div align="center">
+
+![Cristian Tests](/images/Cris.jpeg)
+
+</div>
 
 ---
-* Pruebas de **Kevin Segura Velandia**
 
+### Kevin Segura Velandia
 
-![Pruebas-kevinsegura](/images/Pruebas1-kevinsegura.jpeg)
-![Pruebas-kevinsegura](/images/Pruebas2-kevinsegura.jpeg)
+<div align="center">
+
+![Kevin Segura Tests 1](/images/Pruebas1-kevinsegura.jpeg)
+![Kevin Segura Tests 2](/images/Pruebas2-kevinsegura.jpeg)
+
+</div>
+
+---
+
+## ✅ All Tests Passing
+
+<div align="center">
+
+![All Tests Passing](/images/PruebasOk.png)
+
+</div>
+
+---
+
+## 📊 Test Coverage
+
+<div align="center">
+
+![Test Coverage](/images/Covertura.png)
+
+</div>
